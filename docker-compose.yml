@@ -1,0 +1,32 @@
+version: "3.8"
+
+x-default_environment: &rails_app_environment
+  EDITOR: vim
+  RAILS_DB_USER: postgres
+  RAIlS_DB_PASSWORD: password
+  RAILS_DB_HOST: db
+x-rails_app_volumes: &rails_app_volumes .:/react_rails_api_backend:cached
+
+services:
+  db:
+    image: postgres:12.3-alpine
+    volumes:
+      - ./tmp/db:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+    ports:
+      - "5432:5432"
+  web:
+    build: .
+    command: ash -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3001 -b '0.0.0.0'"
+    volumes:
+      - *rails_app_volumes
+    ports:
+      - "3001:3001"
+    environment:
+      <<: *rails_app_environment
+    depends_on:
+      - db
+    stdin_open: true
+    tty: true
