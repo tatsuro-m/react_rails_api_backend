@@ -1,24 +1,4 @@
-# README
+## React と Rails API モードで簡単なアプリを作るサンプル
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
-
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+- バックエンド: https://github.com/tatsuro-m/react_rails_api_backend
+- フロントエンド: https://github.com/tatsuro-m/react_rails_api_frontend
