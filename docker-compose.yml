@@ -26,6 +26,7 @@ services:
       - "3001:3001"
     environment:
       <<: *rails_app_environment
+      FRONTEND_ORIGIN: http://localhost:3000
     depends_on:
       - db
     stdin_open: true
