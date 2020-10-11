@@ -24,7 +24,11 @@ class PostsController < ApplicationController
   end
 
   def destroy
-
+    if @post.destroy
+      render json: @post
+    else
+      render json: @post.errors
+    end
   end
 
   private
