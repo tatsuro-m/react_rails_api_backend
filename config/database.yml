@@ -16,6 +16,7 @@ test:
 
 production:
   <<: *default
-  database: react_rails_api_backend_production
-  username: react_rails_api_backend
-  password: <%= ENV['BASE_APP_DATABASE_PASSWORD'] %>
+  database: <%= ENV['RAILS_DB_DATABASE'] %>
+  username: <%= ENV['RAILS_DB_USER_NAME'] %>
+  password: <%= ENV['RAILS_DB_PASSWORD'] %>
+  host:  <%= ENV['RAILS_DB_HOST'] %>
