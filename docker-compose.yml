@@ -3,7 +3,7 @@ version: "3.8"
 x-default_environment: &rails_app_environment
   EDITOR: vim
   RAILS_DB_USER: postgres
-  RAIlS_DB_PASSWORD: password
+  RAILS_DB_PASSWORD: password
   RAILS_DB_HOST: db
 x-rails_app_volumes: &rails_app_volumes .:/react_rails_api_backend:cached
 
