@@ -2,4 +2,4 @@
 
 sudo service nginx start
 cd /app
-bundle exec pumactl start
+bundle exec rails db:migrate && bundle exec pumactl start
