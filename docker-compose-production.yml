@@ -1,0 +1,46 @@
+version: "3.8"
+
+x-default_environment: &rails_app_environment
+  EDITOR: vim
+  RAILS_DB_DATABASE: react_rails_api_backend_development
+  RAILS_DB_USER_NAME: postgres
+  RAILS_DB_PASSWORD: password
+  RAILS_DB_HOST: db
+  RAILS_ENV: production
+  RAILS_LOG_TO_STDOUT: 1
+x-rails_app_volumes: &rails_app_volumes .:/app:cached
+
+services:
+  db:
+    image: postgres:12.3-alpine
+    volumes:
+      - ./tmp/db:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+    ports:
+      - "5432:5432"
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile-production
+    volumes:
+      - *rails_app_volumes
+    environment:
+      <<: *rails_app_environment
+      FRONTEND_ORIGIN: http://localhost:3000
+    depends_on:
+      - db
+    stdin_open: true
+    tty: true
+
+  nginx:
+    build:
+      context: .
+      dockerfile: nginx.dockerfile
+    volumes:
+      - *rails_app_volumes
+    ports:
+      - "3001:80"
+    depends_on:
+      - web
